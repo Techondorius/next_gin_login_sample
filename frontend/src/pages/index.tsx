@@ -1,5 +1,21 @@
-const App = () => {
-  return <h1>Hello</h1>;
-};
+import axios from "axios"
+import { useEffect, useState } from "react"
 
-export default App;
+const App = () => {
+  interface indexResponse {
+    message: string
+  }
+  const [res, setRes] = useState<indexResponse>()
+
+  useEffect(() => {
+    axios.get<indexResponse>("http://localhost:8080").then((res) => {
+      setRes(res.data)
+    }).catch((e) => {
+      
+    })
+  }, [])
+
+  return <h1>{res ? res.message : "asdf"}</h1>
+}
+
+export default App
