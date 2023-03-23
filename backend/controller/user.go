@@ -34,8 +34,8 @@ func Login(c *gin.Context) {
 	}
 
 	token := GenerateJWT(user.UserID)
-	c.SetSameSite(http.SameSiteStrictMode)
-	c.SetCookie("token", token, 3600*24*7, "/", "localhost", false, true)
+	c.SetSameSite(http.SameSiteNoneMode)
+	c.SetCookie("token", token, 3600*24*7, "/", "localhost", true, true)
 	c.JSON(200, gin.H{"message": "OK"})
 }
 

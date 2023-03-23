@@ -2,6 +2,7 @@ package main
 
 import (
 	"backend/controller"
+	"fmt"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -43,13 +44,16 @@ func main() {
 }
 
 func CheckJWT(c *gin.Context) {
+	fmt.Println(c.Request.Header["Cookie"])
 	tokenCookie, err := c.Cookie("token")
 	if err != nil {
 		c.JSON(401, gin.H{"error": "unauthorised"})
+		c.Abort()
 		return
 	}
 	if tokenCookie == "" {
 		c.JSON(401, gin.H{"error": "unauthorised"})
+		c.Abort()
 		return
 	}
 
