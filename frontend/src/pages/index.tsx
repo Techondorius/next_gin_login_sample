@@ -42,6 +42,7 @@ const App = () => {
       .then((res) => {
         console.log(res)
       })
+      .catch((e) => console.log(e))
   }
 
   return (
